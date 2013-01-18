@@ -1,9 +1,10 @@
 #!/usr/bin/php
 <?php
 
-require_once('readfiles.php');
-require_once('functions.php');
-require_once('config.php');
+require_once('includes/readfiles.php');
+require_once('includes/functions.php');
+require_once('includes/simpleimage.php');
+require_once('includes/config.php');
 
 echo "start\n";
 
