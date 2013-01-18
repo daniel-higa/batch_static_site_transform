@@ -2,6 +2,7 @@
 <?php
 
 require_once('readfiles.php');
+require_once('functions.php');
 require_once('config.php');
 
 echo "start\n";
@@ -30,6 +31,19 @@ $tree = new ReadFiles($in_dir);
 $dirs = $tree->getDirs();
 
 foreach ($dirs as $item) {
-    echo $item->getName() . "\n";
-    print_r($item->getFirstHtml());
+    echo "Directorio: " . $item->getName() . "\n";
+    $content = '';
+    if ($html = $item->getFirstHTML()) {
+        $content = file_get_contents($html->path);
+    }
+    $jpgs = $item->getAllJPG();
+
+    if (!empty($content) and !empty($jpgs)) {
+        mkdir($out_dir .'/' . $item->getName(), 0770, true);
+        $text = convert($content);
+        file_put_contents($out_dir .'/' . $item->getName() . '/1.txt', $text);
+        while ($jpg = array_pop($jpgs)) {
+            format_jpg($jpg, $out_dir .'/' . $item->getName());
+        }
+    }
 }

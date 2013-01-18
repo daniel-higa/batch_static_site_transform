@@ -63,4 +63,16 @@ class ReadFiles {
             }
         }
     }
+
+    public function getAllJPG() {
+        $files = $this->getFiles();
+        $jpgs = array();
+        foreach($files as $f) {
+            if (preg_match('/(.jpg)|(.jpeg)$/', $f->getName())) {
+                $jpgs[] = $f;
+            }
+        }
+        return $jpgs;
+    }
+
 }
