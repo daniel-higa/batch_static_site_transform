@@ -42,9 +42,12 @@ class SimpleImage {
        $im = imagecreatefrompng($watermark);
        $height = max($this->getHeight(), imagesy($im));
        $width = max($this->getHeight(), imagesx($im));
-       //$im2 = imagecreatetruecolor($width, $height);
-       //imagecopyresampled($im2, $im, 0, 0, 0, 0, $width, $height, imagesx($im), imagesy($im));
-       imagecopy($this->image, $im, 0,0,0,0, $width, $height);
+       $im2 = imagecreatetruecolor($width, $height);
+       imagesavealpha($im2, true);
+       $trans_colour = imagecolorallocatealpha($im2, 0, 0, 0, 127);
+       imagefill($im2, 0, 0, $trans_colour);
+       imagecopyresampled($im2, $im, 0, 0, 0, 0, $this->getWidth(), $this->getHeight(), imagesx($im), imagesy($im));
+       imagecopy($this->image, $im2, 0,0,0,0, $width, $height);
     }     
 
     function save($filename, $image_type=IMAGETYPE_JPEG, $compression=75, $permissions=null) {
