@@ -1,6 +1,15 @@
 <?php
 function convert($html) {
-   return strip_tags($html);
+   $text = ereg_replace('<h2.*/h2>', '', $html);
+   $text = ereg_replace('<br/>', '\n', $text);
+   $text = ereg_replace("\n", '<br/>', trim(strip_tags($text)));
+   $text_ini = substr($text, 0, MAX_CHAR);
+   $words = explode(' ', substr($text, MAX_CHAR, strlen($text) - MAX_CHAR));
+   $text = $text_ini;
+   if (!empty($words)) {
+       $text .= $words[0];
+   }
+   return $text;
 }
 
 function format_jpg($file, $save_path) {
