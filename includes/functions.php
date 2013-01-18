@@ -16,3 +16,13 @@ function format_jpg($file, $save_path) {
     $img->save($save_path . '/' . $file->getName());
 }
 
+function getSortImages($html) {
+    $dom = new DOMDocument();
+    $dom->loadHTML($html);
+    $imgs = $dom->getElementsByTagName('img');
+    $imgs_path = array();
+    foreach ($imgs as $img) {
+       $imgs_path[] = $img->getAttribute('src');
+    }
+    return $imgs_path;
+}
