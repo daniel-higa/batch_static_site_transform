@@ -45,7 +45,7 @@ foreach ($dirs as $item) {
         mkdir($out_dir .'/' . $item->getName(), 0770, true);
         $text = convert($content);
         file_put_contents($out_dir .'/' . $item->getName() . '/1.txt', $text);
-        file_put_contents($out_dir .'/' . $item->getName() . '/imges.txt', implode("\n", $sort_jpgs));
+        file_put_contents($out_dir .'/' . $item->getName() . '/images.txt', implode("\n", $sort_jpgs));
         while ($jpg = array_pop($jpgs)) {
             format_jpg($jpg, $out_dir .'/' . $item->getName());
         }
