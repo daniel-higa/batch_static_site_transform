@@ -37,7 +37,7 @@ foreach ($dirs as $item) {
     if ($html = $item->getFirstHTML()) {
         $content = file_get_contents($html->path);
     }
-    $jpgs = $item->getAllJPG();
+    $jpgs = $item->getAllImages();
     $sort_jpgs = getSortImages($content);
     
 
